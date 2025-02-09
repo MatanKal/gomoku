@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane prefHeight="579.0" prefWidth="565.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gomoku.GameController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
+    <!-- תמונת הלוח -->
+    <ImageView fx:id="boardImage" fitHeight="490" fitWidth="490" preserveRatio="false" />
+
+    <!-- רשת 14x14 שתואמת את הלוח -->
+    <GridPane fx:id="gridPane" alignment="CENTER" maxHeight="490" maxWidth="490" minHeight="490" minWidth="490"
+              style="-fx-background-color: transparent;">
+
+        <!-- הגדרת עמודות -->
+        <columnConstraints>
+            <ColumnConstraints prefWidth="35.0" />
+            <ColumnConstraints prefWidth="35.0" />
+            <ColumnConstraints prefWidth="35.0" />
+            <ColumnConstraints prefWidth="35.0" />
+            <ColumnConstraints prefWidth="35.0" />
+            <ColumnConstraints prefWidth="35.0" />
+            <ColumnConstraints prefWidth="35.0" />
+            <ColumnConstraints prefWidth="35.0" />
+            <ColumnConstraints prefWidth="35.0" />
+            <ColumnConstraints prefWidth="35.0" />
+            <ColumnConstraints prefWidth="35.0" />
+            <ColumnConstraints prefWidth="35.0" />
+            <ColumnConstraints prefWidth="35.0" />
+            <ColumnConstraints prefWidth="35.0" />
+            <ColumnConstraints prefWidth="35.0" />
+        </columnConstraints>
+
+        <!-- הגדרת שורות -->
+        <rowConstraints>
+            <RowConstraints prefHeight="35.0" />
+            <RowConstraints prefHeight="35.0" />
+            <RowConstraints prefHeight="35.0" />
+            <RowConstraints prefHeight="35.0" />
+            <RowConstraints prefHeight="35.0" />
+            <RowConstraints prefHeight="35.0" />
+            <RowConstraints prefHeight="35.0" />
+            <RowConstraints prefHeight="35.0" />
+            <RowConstraints prefHeight="35.0" />
+            <RowConstraints prefHeight="35.0" />
+            <RowConstraints prefHeight="35.0" />
+            <RowConstraints prefHeight="35.0" />
+            <RowConstraints prefHeight="35.0" />
+            <RowConstraints prefHeight="35.0" />
+            <RowConstraints prefHeight="35.0" />
+        </rowConstraints>
+
+    </GridPane>
+
+</StackPane>
