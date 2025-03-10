@@ -8,15 +8,22 @@ import javafx.scene.shape.Circle;
 import javafx.scene.paint.Color;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.control.Alert;
+
+import java.io.Console;
+
 public class GameController {
     @FXML
     private GridPane gridPane;
 
-    private static final int GRID_SIZE = 15;
-    private static final int CELL_SIZE = 35;
-    private boolean isBlackTurn = true;
+    private static final int GRID_SIZE = 13;
+    private static final double CELL_SIZE = 39;
+    private gameLogic logic = new gameLogic();
+    private ailogic ai = new ailogic(logic);
+
     @FXML
     public ImageView boardImage;
+
     @FXML
     public void initialize() {
         Image image = new Image(getClass().getResourceAsStream("board.jpg"));
@@ -35,14 +42,60 @@ public class GameController {
     }
 
     private void placePiece(MouseEvent event, int row, int col) {
-        StackPane cell = (StackPane) gridPane.getChildren().get(row * GRID_SIZE + col);
-        if (!cell.getChildren().isEmpty()) {
-            return;
+        if (!logic.placePiece(row, col)) {
+            return; // if the cell is occupied do nothing
         }
+        logic.SetLastMove(row, col);
+        StackPane cell = (StackPane) gridPane.getChildren().get(row * GRID_SIZE + col);
         Circle piece = new Circle(12);
-        piece.setFill(isBlackTurn ? Color.BLACK : Color.WHITE);
+        piece.setFill(logic.isBlackTurn() ? Color.WHITE : Color.BLACK);
         cell.getChildren().add(piece);
-        isBlackTurn = !isBlackTurn;
+        String StateFound = logic.StatePosition(row, col);
+        if(StateFound!=null){
+            System.out.println(StateFound);
+        }
+        int winner = logic.checkWin(row, col);
+        if (winner == 1 || winner == 2) {
+            showWinnerAlert(winner);
+            resetGame();
+        }
+        logic.changeTurn();
 
+        if (logic.isBlackTurn()) {
+            int[] aiMove = ai.aiMove();
+            placeAIPiece( aiMove[0], aiMove[1]);
+            logic.changeTurn();
+
+        }
+    }
+
+    private void placeAIPiece( int row, int col) {
+        StackPane cell = (StackPane) gridPane.getChildren().get(row * GRID_SIZE + col);
+        Circle piece = new Circle(12);
+        piece.setFill(logic.isBlackTurn() ? Color.WHITE : Color.BLACK);
+        cell.getChildren().add(piece);
+        String StateFound = logic.StatePosition(row, col);
+        if(StateFound!=null){
+            System.out.println(StateFound);
+        }
+        int winner = logic.checkWin(row, col);
+        if (winner == 1 || winner == 2) {
+            showWinnerAlert(winner);
+            resetGame();
+        }
+    }
+
+    private void showWinnerAlert(int winner) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Game Over");
+        alert.setHeaderText(null);
+        alert.setContentText((winner == 1 ? "Black" : "White") + " wins!");
+        alert.showAndWait();
+    }
+
+    private void resetGame() {
+        gridPane.getChildren().clear();
+        logic = new gameLogic();
+        initialize();
     }
 }

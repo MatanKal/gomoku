@@ -10,48 +10,41 @@
     </padding>
 
     <!-- תמונת הלוח -->
-    <ImageView fx:id="boardImage" fitHeight="490" fitWidth="490" preserveRatio="false" />
+    <ImageView fx:id="boardImage" fitHeight="600" fitWidth="600" preserveRatio="false" />
 
-    <!-- רשת 14x14 שתואמת את הלוח -->
-    <GridPane fx:id="gridPane" alignment="CENTER" maxHeight="490" maxWidth="490" minHeight="490" minWidth="490"
-              style="-fx-background-color: transparent;">
-
-        <!-- הגדרת עמודות -->
+    <!-- רשת 13x13 שתואמת את הלוח -->
+    <GridPane fx:id="gridPane" alignment="CENTER" maxHeight="555" maxWidth="555" minHeight="555" minWidth="555" style="-fx-background-color: transparent;">
         <columnConstraints>
-            <ColumnConstraints prefWidth="35.0" />
-            <ColumnConstraints prefWidth="35.0" />
-            <ColumnConstraints prefWidth="35.0" />
-            <ColumnConstraints prefWidth="35.0" />
-            <ColumnConstraints prefWidth="35.0" />
-            <ColumnConstraints prefWidth="35.0" />
-            <ColumnConstraints prefWidth="35.0" />
-            <ColumnConstraints prefWidth="35.0" />
-            <ColumnConstraints prefWidth="35.0" />
-            <ColumnConstraints prefWidth="35.0" />
-            <ColumnConstraints prefWidth="35.0" />
-            <ColumnConstraints prefWidth="35.0" />
-            <ColumnConstraints prefWidth="35.0" />
-            <ColumnConstraints prefWidth="35.0" />
-            <ColumnConstraints prefWidth="35.0" />
+            <ColumnConstraints prefWidth="39" />
+            <ColumnConstraints prefWidth="39" />
+            <ColumnConstraints prefWidth="39" />
+            <ColumnConstraints prefWidth="39" />
+            <ColumnConstraints prefWidth="39" />
+            <ColumnConstraints prefWidth="39" />
+            <ColumnConstraints prefWidth="39" />
+            <ColumnConstraints prefWidth="39" />
+            <ColumnConstraints prefWidth="39" />
+            <ColumnConstraints prefWidth="39" />
+            <ColumnConstraints prefWidth="39" />
+            <ColumnConstraints prefWidth="39" />
+            <ColumnConstraints prefWidth="39" />
         </columnConstraints>
 
         <!-- הגדרת שורות -->
         <rowConstraints>
-            <RowConstraints prefHeight="35.0" />
-            <RowConstraints prefHeight="35.0" />
-            <RowConstraints prefHeight="35.0" />
-            <RowConstraints prefHeight="35.0" />
-            <RowConstraints prefHeight="35.0" />
-            <RowConstraints prefHeight="35.0" />
-            <RowConstraints prefHeight="35.0" />
-            <RowConstraints prefHeight="35.0" />
-            <RowConstraints prefHeight="35.0" />
-            <RowConstraints prefHeight="35.0" />
-            <RowConstraints prefHeight="35.0" />
-            <RowConstraints prefHeight="35.0" />
-            <RowConstraints prefHeight="35.0" />
-            <RowConstraints prefHeight="35.0" />
-            <RowConstraints prefHeight="35.0" />
+            <RowConstraints prefHeight="39" />
+            <RowConstraints prefHeight="39" />
+            <RowConstraints prefHeight="39" />
+            <RowConstraints prefHeight="39" />
+            <RowConstraints prefHeight="39" />
+            <RowConstraints prefHeight="39" />
+            <RowConstraints prefHeight="39" />
+            <RowConstraints prefHeight="39" />
+            <RowConstraints prefHeight="39" />
+            <RowConstraints prefHeight="39" />
+            <RowConstraints prefHeight="39" />
+            <RowConstraints prefHeight="39" />
+            <RowConstraints prefHeight="39" />
         </rowConstraints>
 
     </GridPane>
