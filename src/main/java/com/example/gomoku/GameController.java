@@ -45,11 +45,11 @@ public class GameController {
         if (!logic.placePiece(row, col)) {
             return; // if the cell is occupied do nothing
         }
-        logic.SetLastMove(row, col);
         StackPane cell = (StackPane) gridPane.getChildren().get(row * GRID_SIZE + col);
         Circle piece = new Circle(12);
-        piece.setFill(logic.isBlackTurn() ? Color.WHITE : Color.BLACK);
+        piece.setFill(Color.WHITE);
         cell.getChildren().add(piece);
+        logic.SetLastMove(row, col);
         String StateFound = logic.StatePosition(row, col);
         if(StateFound!=null){
             System.out.println(StateFound);
@@ -59,20 +59,19 @@ public class GameController {
             showWinnerAlert(winner);
             resetGame();
         }
-        logic.changeTurn();
-
         if (logic.isBlackTurn()) {
             int[] aiMove = ai.aiMove();
             placeAIPiece( aiMove[0], aiMove[1]);
             logic.changeTurn();
-
         }
+        else logic.changeTurn();
+
     }
 
     private void placeAIPiece( int row, int col) {
         StackPane cell = (StackPane) gridPane.getChildren().get(row * GRID_SIZE + col);
         Circle piece = new Circle(12);
-        piece.setFill(logic.isBlackTurn() ? Color.WHITE : Color.BLACK);
+        piece.setFill(Color.BLACK);
         cell.getChildren().add(piece);
         String StateFound = logic.StatePosition(row, col);
         if(StateFound!=null){

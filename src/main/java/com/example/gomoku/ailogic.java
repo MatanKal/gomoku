@@ -21,13 +21,10 @@ public class ailogic {
         if(gameLogic.getWhiteMoves().size() <=2  && gameLogic.getBlackMoves().size() <= 2) {
             row = Integer.parseInt(LBmove[0]);
             col = Integer.parseInt(LBmove[1]);
-
+            if(row<=3 || col<=3|| row>=9 || col>=9) {
+                return CloseBorderInteraction(row, col);
+            }
             for(int i = 0; i <= 2; i++) {
-                if(row<=3 || col<=3|| row>=9 || col>=9) {
-                    CloseBorderInteraction(row, col);
-                    found=true;
-                    break;
-                }
                 for (int[] dir : directions) {
                     if (gameLogic.placePiece(row + dir[0], col + dir[1])) {
                         row = row + dir[0];
@@ -63,23 +60,23 @@ public class ailogic {
         arr[1] = col;
         return arr;
     }
-    public void CloseBorderInteraction(int row, int col){
+    public int[] CloseBorderInteraction(int row, int col){
         if(row<=3&&col<=3){
             row = row + directions[2][0];
             col = col + directions[2][1];
         }
-        if(row<=3&&col>=9){
+        else if(row<=3&&col>=9){
             row = row + directions[2][0];
             col = col - directions[2][1];
         }
-        if(row>=9&&col<=3){
+        else if(row>=9&&col<=3){
             row = row - directions[2][0];
             col = col + directions[2][1];
         }
-        if(row>=9&&col>=9){
+        else if(row>=9&&col>=9){
             row = row - directions[2][0];
             col = col - directions[2][1];
         }
-
+        return new int[]{row, col};
     }
 }

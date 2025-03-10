@@ -150,10 +150,6 @@ public class gameLogic {
         return row >= 0 && row < GRID_SIZE && col >= 0 && col < GRID_SIZE;
     }
 
-
-
-
-
     public void resetGame() {
         BMoves.clear();
         WMoves.clear();
