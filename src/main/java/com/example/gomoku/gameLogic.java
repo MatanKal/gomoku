@@ -26,7 +26,7 @@ public class gameLogic {
     public boolean placePiece(int row, int col) {
         String move = row + "," + col;
         if (BMoves.contains(move) || WMoves.contains(move)) {
-            return false; // Cell is already occupied
+            return false; // cell is already occupied
         }
 
         if (isBlackTurn) {
@@ -40,7 +40,6 @@ public class gameLogic {
     public char checkWin(int row, int col) {
         String move = row + "," + col;
         Set<String> playerMoves = BMoves.contains(move) ? BMoves : WMoves;
-
         for (int[] dir : directions) {
             int count = 1;
             for (int i = 1; i < 5; i++) {
@@ -69,19 +68,18 @@ public class gameLogic {
         String move = row + "," + col;
         Set<String> playerMoves = BMoves.contains(move) ? BMoves : WMoves;
 
-        // Track the highest priority pattern found
+        // find the best parttern
         String bestPattern = null;
 
         for (int[] dir : directions) {
             int count = 1;
             boolean openStart = false, openEnd = false;
 
-            // Check in positive direction
+            //check in positive direction
             for (int i = 1; i < 5; i++) {
                 int r = row + dir[0] * i, c = col + dir[1] * i;
-                // Add boundary check to avoid issues
                 if (r < 0 || r >= GRID_SIZE || c < 0 || c >= GRID_SIZE || !playerMoves.contains(r + "," + c)) {
-                    // Check if position is empty (not occupied by any player)
+                    // check if position is empty
                     openEnd = r >= 0 && r < GRID_SIZE && c >= 0 && c < GRID_SIZE &&
                             !BMoves.contains(r + "," + c) && !WMoves.contains(r + "," + c);
                     break;
@@ -89,12 +87,10 @@ public class gameLogic {
                 count++;
             }
 
-            // Check in negative direction
+            // check in negative direction
             for (int i = 1; i < 5; i++) {
                 int r = row - dir[0] * i, c = col - dir[1] * i;
-                // Add boundary check to avoid issues
                 if (r < 0 || r >= GRID_SIZE || c < 0 || c >= GRID_SIZE || !playerMoves.contains(r + "," + c)) {
-                    // Check if position is empty (not occupied by any player)
                     openStart = r >= 0 && r < GRID_SIZE && c >= 0 && c < GRID_SIZE &&
                             !BMoves.contains(r + "," + c) && !WMoves.contains(r + "," + c);
                     break;
@@ -108,12 +104,11 @@ public class gameLogic {
             else if (count == 3) pattern = (openStart && openEnd) ? "LiveThree" : "DeadThree";
             else if (count == 2) pattern = (openStart && openEnd) ? "LiveTwo" : "DeadTwo";
 
-            // Return immediately if we found a "FiveInARow" pattern
+            // if win return
             if (pattern != null && pattern.equals("FiveInARow")) {
                 return pattern;
             }
 
-            // Otherwise, keep the best pattern found
             if (pattern != null && (bestPattern == null || hasHigherPriority(pattern, bestPattern))) {
                 bestPattern = pattern;
             }
