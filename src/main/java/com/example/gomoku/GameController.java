@@ -29,8 +29,6 @@ public class GameController {
         Image image = new Image(getClass().getResourceAsStream("board.jpg"));
         boardImage.setImage(image);
         setupBoard();
-
-        // Make AI's first move if AI starts
         if (logic.isBlackTurn()) {
             makeAIMove();
         }
@@ -50,57 +48,51 @@ public class GameController {
     }
 
     private void placePiece(MouseEvent event, int row, int col) {
-        // Return early if move is invalid
+        // return if move is invalid
         if (!logic.placePiece(row, col)) {
             return;
         }
 
-        // Update UI and game state
+        // update look of the cell
         StackPane cell = (StackPane) gridPane.getChildren().get(row * GRID_SIZE + col);
         Circle piece = new Circle(12);
-        piece.setFill(Color.WHITE); // Player is white
+        piece.setFill(Color.WHITE);
         cell.getChildren().add(piece);
         logic.SetLastMove(row, col);
 
-        // Print pattern found (if any)
+        // print pattern found
         String stateFound = logic.StatePosition(row, col);
         if (stateFound != null) {
             System.out.println("Player created: " + stateFound);
         }
 
-        // Check for win
+        // print winner
         char winner = logic.checkWin(row, col);
         if (winner == 'W' || winner == 'B') {
             showWinnerAlert(winner == 'B' ? 1 : 2);
            // resetGame();
-            return; // Important: return here to avoid continuing
+            return;
         }
 
-        // Change turn and let AI play
+        // change turns
         logic.changeTurn();
         makeAIMove();
     }
 
     private void makeAIMove() {
-        // Let AI choose a move
         int[] aiMove = ai.aiMove();
 
-        // Register move in game logic - THIS IS MISSING
         if (!logic.placePiece(aiMove[0], aiMove[1])) {
             System.err.println("AI attempted invalid move: " + aiMove[0] + "," + aiMove[1]);
-            return; // Exit if the move is somehow invalid
+            return;
         }
 
-        // Set last move - THIS IS MISSING
         logic.SetLastMove(aiMove[0], aiMove[1]);
 
-        // Update UI
         StackPane cell = (StackPane) gridPane.getChildren().get(aiMove[0] * GRID_SIZE + aiMove[1]);
         Circle piece = new Circle(12);
-        piece.setFill(Color.BLACK); // AI is black
+        piece.setFill(Color.BLACK);
         cell.getChildren().add(piece);
-
-        // Rest of the method remains unchanged
         String stateFound = logic.StatePosition(aiMove[0], aiMove[1]);
         if (stateFound != null) {
             System.out.println("AI created: " + stateFound);
