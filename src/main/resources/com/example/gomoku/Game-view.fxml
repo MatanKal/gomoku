@@ -9,10 +9,8 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
 
-    <!-- תמונת הלוח -->
     <ImageView fx:id="boardImage" fitHeight="600" fitWidth="600" preserveRatio="false" />
 
-    <!-- רשת 13x13 שתואמת את הלוח -->
     <GridPane fx:id="gridPane" alignment="CENTER" maxHeight="555" maxWidth="555" minHeight="555" minWidth="555" style="-fx-background-color: transparent;">
         <columnConstraints>
             <ColumnConstraints prefWidth="39" />
@@ -30,7 +28,6 @@
             <ColumnConstraints prefWidth="39" />
         </columnConstraints>
 
-        <!-- הגדרת שורות -->
         <rowConstraints>
             <RowConstraints prefHeight="39" />
             <RowConstraints prefHeight="39" />
