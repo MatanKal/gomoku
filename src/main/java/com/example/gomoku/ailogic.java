@@ -33,9 +33,7 @@ public class ailogic {
                         break;
                     }
                 }
-                if(found) {
-                    break;
-                }
+
             }
             gameLogic.placePiece(row, col);
             arr[0] = row;

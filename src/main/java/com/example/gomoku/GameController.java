@@ -35,15 +35,23 @@ public class GameController {
                 cell.setStyle("-fx-border-color: transparent;");
                 final int r = row;
                 final int c = col;
-                cell.setOnMouseClicked(event -> placePiece(event, r, c));
+                if (logic.isBlackTurn()) {
+                    int[] aiMove = ai.aiMove();
+                    placeAIPiece( aiMove[0], aiMove[1]);
+                    logic.changeTurn();
+                }
+                else{
+                    cell.setOnMouseClicked(event -> placePiece(event, r, c));
+                }
                 gridPane.add(cell, col, row);
+
             }
         }
     }
 
     private void placePiece(MouseEvent event, int row, int col) {
         if (!logic.placePiece(row, col)) {
-            return; // if the cell is occupied do nothing
+            return;
         }
         StackPane cell = (StackPane) gridPane.getChildren().get(row * GRID_SIZE + col);
         Circle piece = new Circle(12);
@@ -59,12 +67,7 @@ public class GameController {
             showWinnerAlert(winner);
             resetGame();
         }
-        if (logic.isBlackTurn()) {
-            int[] aiMove = ai.aiMove();
-            placeAIPiece( aiMove[0], aiMove[1]);
-            logic.changeTurn();
-        }
-        else logic.changeTurn();
+        logic.changeTurn();
 
     }
 
